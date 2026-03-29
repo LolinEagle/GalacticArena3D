@@ -2,10 +2,17 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class MovementBehaviour : MonoBehaviour{
-	[SerializeField] private Transform	playerCamera;
-	[SerializeField] private float		speed = 5f;
-	[SerializeField] private GameObject	shotPrefab;
-	private Rigidbody					rb;
+	[Header("References")]
+	[SerializeField] private Transform			playerCamera;
+	[SerializeField] private GameObject			shotPrefab;
+	[SerializeField] private InteractBehaviour	interactBehaviour;
+
+	[Header("Property")]
+	[SerializeField] private float	speed = 5f;
+    [SerializeField] private float	shotsPerSecond = 9f;
+    [SerializeField] private float	nextFireTime = 0f; 
+
+	private Rigidbody	rb;
 
 	void	Start(){
 		rb = GetComponent<Rigidbody>();
@@ -30,10 +37,12 @@ public class MovementBehaviour : MonoBehaviour{
 		rb.MoveRotation(deltaRotation);
 
 		// Shot
-		if (Mouse.current.leftButton.wasPressedThisFrame){
+		if (Mouse.current.leftButton.isPressed && Time.time >= nextFireTime){
 			GameObject	shot = Instantiate(shotPrefab);
 			shot.transform.position = transform.position;
 			shot.transform.rotation = transform.rotation;
+			interactBehaviour.PlayShot();
+			nextFireTime = Time.time + (1f / shotsPerSecond);
 		};
 	}
 

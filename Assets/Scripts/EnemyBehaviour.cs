@@ -4,7 +4,8 @@ using UnityEngine.AI;
 
 public class EnemyAi : MonoBehaviour{
 	[Header("Reference")]
-	[SerializeField] private NavMeshAgent	agent;
+	[SerializeField] private NavMeshAgent		agent;
+	[SerializeField] private InteractBehaviour	interactBehaviour;
 
 	[Header("Stats")]
 	[SerializeField] private int	maxHealth;
@@ -25,6 +26,9 @@ public class EnemyAi : MonoBehaviour{
 
 	public void		TakeDamage(int damages = 1){
 		currentHealth -= damages;
-		if (currentHealth <= 0) Destroy(gameObject);
+		if (currentHealth <= 0){
+			interactBehaviour.PlayDie();
+			Destroy(gameObject);
+		}
 	}
 }
