@@ -6,6 +6,7 @@ public class MovementBehaviour : MonoBehaviour{
 	[SerializeField] private Transform			playerCamera;
 	[SerializeField] private GameObject			shotPrefab;
 	[SerializeField] private InteractBehaviour	interactBehaviour;
+	[SerializeField] private Transform			cannon;
 
 	[Header("Property")]
 	[SerializeField] private float	speed = 5f;
@@ -39,7 +40,7 @@ public class MovementBehaviour : MonoBehaviour{
 		// Shot
 		if (Mouse.current.leftButton.isPressed && Time.time >= nextFireTime){
 			GameObject	shot = Instantiate(shotPrefab);
-			shot.transform.position = transform.position;
+			shot.transform.position = cannon.position;
 			shot.transform.rotation = transform.rotation;
 			interactBehaviour.PlayShot();
 			nextFireTime = Time.time + (1f / shotsPerSecond);
