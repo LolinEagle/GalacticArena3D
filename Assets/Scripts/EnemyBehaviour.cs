@@ -1,34 +1,47 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyAi : MonoBehaviour{
-	[Header("Reference")]
-	[SerializeField] private NavMeshAgent		agent;
-	[SerializeField] private InteractBehaviour	interactBehaviour;
-
 	[Header("Stats")]
 	[SerializeField] private int	maxHealth;
-	[SerializeField] private int	currentHealth;
-	[SerializeField] private float	speed;
+	[SerializeField] private float	speedAddOnHit;
 
-	private Transform	player;
+	private int				currentHealth;
+	private NavMeshAgent	agent;
+	private Material		material;
+	private Transform		player;
 
 	private void	Awake(){
 		player = GameObject.FindGameObjectWithTag("Player").transform;
+		if (player == null){
+			Debug.LogError("Player not found");
+			Destroy(gameObject);
+		}
 		currentHealth = maxHealth;
-		agent.speed = speed;
+		agent = GetComponent<NavMeshAgent>();
+		material = GetComponent<Renderer>().material;
 	}
 
 	void			Update(){
 		agent.SetDestination(player.position);
 	}
 
-	public void		TakeDamage(int damages = 1){
-		currentHealth -= damages;
-		if (currentHealth <= 0){
-			interactBehaviour.PlayDie();
+	private void	OnCollisionStay(Collision collision){
+		if (collision.gameObject.CompareTag("Player"))
+			player.GetComponent<PlayerStats>().heal--;
+	}
+
+	public void		TakeDamage(){
+		if (--currentHealth <= 0){
+			// Die
+			player.GetComponent<InteractBehaviour>().PlayDie();
+			player.GetComponent<PlayerStats>().score++;
 			Destroy(gameObject);
+		} else {
+			// Get faster, smaller and change color
+			transform.localScale -= new Vector3(0.1f, 0.0f, 0.1f);
+			agent.speed += speedAddOnHit;
+			material.color = currentHealth == 2 ? Color.yellow : Color.red;
 		}
 	}
 }

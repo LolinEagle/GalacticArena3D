@@ -255,7 +255,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 624d909f45a3fd048a5f5467bd7835c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  playerCamera: {fileID: 0}
   shotPrefab: {fileID: 2849841699194630160, guid: 0f91ae3b04c546c4f8d74bd954d80671, type: 3}
   interactBehaviour: {fileID: 2214993099729101230}
   cannon: {fileID: 7014849528142706652}
@@ -290,7 +289,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde96d4e51a2e4d498ce806e6288ad02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  health: 100
+  heal: 100
+  tp: 0
+  tpRecovery: 15
+  score: 0
 --- !u!1 &6080242332217092839
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,7 +337,7 @@ GameObject:
   - component: {fileID: 4027969677668133432}
   m_Layer: 0
   m_Name: Canon
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

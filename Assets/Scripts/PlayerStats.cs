@@ -1,13 +1,21 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour{
-	public int	health = 100;
+	[Header("Stats")]
+	public float	heal = 100f;
+	public float	tp = 0f;
+	private float	tpTime = 0f;
+	public float	tpRecovery = 15f;
+	public int		score = 0;
 
-	void Start(){
-		
+	void	Update(){
+		if (heal <= 0f)
+			SceneManager.LoadScene("Level");
+		tp = Mathf.Min(Time.time - tpTime, tpRecovery);
 	}
 
-	void Update(){
-		
+	void	Tp(){
+		tpTime = Time.time;
 	}
 }

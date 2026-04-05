@@ -3,19 +3,20 @@ using UnityEngine.InputSystem;
 
 public class MovementBehaviour : MonoBehaviour{
 	[Header("References")]
-	[SerializeField] private Transform			playerCamera;
 	[SerializeField] private GameObject			shotPrefab;
 	[SerializeField] private InteractBehaviour	interactBehaviour;
 	[SerializeField] private Transform			cannon;
 
 	[Header("Property")]
 	[SerializeField] private float	speed = 5f;
-    [SerializeField] private float	shotsPerSecond = 9f;
-    [SerializeField] private float	nextFireTime = 0f; 
+	[SerializeField] private float	shotsPerSecond = 9f;
+	[SerializeField] private float	nextFireTime = 0f; 
 
+	private Transform	playerCamera;
 	private Rigidbody	rb;
 
 	void	Start(){
+		playerCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
 		rb = GetComponent<Rigidbody>();
 	}
 

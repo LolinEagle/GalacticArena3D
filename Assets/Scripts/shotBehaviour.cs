@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class shotBehaviour : MonoBehaviour{
 	[SerializeField] private float	speed = 5f;
