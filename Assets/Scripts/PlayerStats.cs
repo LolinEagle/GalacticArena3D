@@ -13,6 +13,9 @@ public class PlayerStats : MonoBehaviour{
 		if (heal <= 0f)
 			SceneManager.LoadScene("Level");
 		tp = Mathf.Min(Time.time - tpTime, tpRecovery);
+
+		if (score >= 100)
+			SceneManager.LoadScene("Title");
 	}
 
 	void	Tp(){

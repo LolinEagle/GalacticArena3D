@@ -9,13 +9,14 @@ public class MovementBehaviour : MonoBehaviour{
 
 	[Header("Property")]
 	[SerializeField] private float	speed = 5f;
-	[SerializeField] private float	shotsPerSecond = 9f;
-	[SerializeField] private float	nextFireTime = 0f; 
+	[SerializeField] private float	shotsPerSecond;
 
+	private float		nextFireTime;
 	private Transform	playerCamera;
 	private Rigidbody	rb;
 
 	void	Start(){
+		nextFireTime = 0f;
 		playerCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
 		rb = GetComponent<Rigidbody>();
 	}

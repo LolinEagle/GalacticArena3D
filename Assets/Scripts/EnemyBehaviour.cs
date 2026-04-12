@@ -3,9 +3,11 @@ using UnityEngine.AI;
 
 public class EnemyAi : MonoBehaviour{
 	[Header("Stats")]
+	[SerializeField] private float	timeToSpawn;
 	[SerializeField] private int	maxHealth;
 	[SerializeField] private float	speedAddOnHit;
 
+	private float			ennemieSpawn;
 	private int				currentHealth;
 	private NavMeshAgent	agent;
 	private Material		material;
@@ -17,21 +19,34 @@ public class EnemyAi : MonoBehaviour{
 			Debug.LogError("Player not found");
 			Destroy(gameObject);
 		}
+
+		ennemieSpawn = Time.time;
 		currentHealth = maxHealth;
 		agent = GetComponent<NavMeshAgent>();
 		material = GetComponent<Renderer>().material;
 	}
 
-	void			Update(){
-		agent.SetDestination(player.position);
+	void			FixedUpdate(){
+		if (IsSpawn()){
+			agent.SetDestination(player.position);
+		} else {
+			float	s = Mathf.Min((Time.time - ennemieSpawn) / timeToSpawn, 1f);
+			transform.localScale = new Vector3(s, transform.localScale.y, s);
+		}
 	}
 
 	private void	OnCollisionStay(Collision collision){
-		if (collision.gameObject.CompareTag("Player"))
+		if (IsSpawn() && collision.gameObject.CompareTag("Player"))
 			player.GetComponent<PlayerStats>().heal--;
 	}
 
+	private bool	IsSpawn(){
+		return (Time.time >= ennemieSpawn + timeToSpawn);
+	}
+
 	public void		TakeDamage(){
+		if (!IsSpawn())
+			return ;
 		if (--currentHealth <= 0){
 			// Die
 			player.GetComponent<InteractBehaviour>().PlayDie();

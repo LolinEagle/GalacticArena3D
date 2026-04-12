@@ -259,8 +259,7 @@ MonoBehaviour:
   interactBehaviour: {fileID: 2214993099729101230}
   cannon: {fileID: 7014849528142706652}
   speed: 6
-  shotsPerSecond: 9
-  nextFireTime: 0
+  shotsPerSecond: 6
 --- !u!114 &2214993099729101230
 MonoBehaviour:
   m_ObjectHideFlags: 0

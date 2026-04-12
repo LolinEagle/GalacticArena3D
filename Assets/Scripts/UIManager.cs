@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour{
 	[SerializeField] private TMP_Text		scoreText;
 	[SerializeField] private PlayerStats	playerStats;
 
-	void Update(){
+	void	Update(){
 		healText.text = "Heal: " + playerStats.heal;
 		tpText.text = "Tp: " + playerStats.tp;
 		scoreText.text = "Score: " + playerStats.score;
