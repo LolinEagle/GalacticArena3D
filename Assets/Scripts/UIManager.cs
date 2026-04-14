@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour{
 
 	void	Update(){
 		healText.text = "Heal: " + playerStats.heal;
-		tpText.text = "Tp: " + playerStats.tp;
+		tpText.text = "Tp: " + playerStats.GetTp();
 		scoreText.text = "Score: " + playerStats.score;
 	}
 }
