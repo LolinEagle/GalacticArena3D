@@ -13,8 +13,12 @@ public class shotBehaviour : MonoBehaviour{
 	}
 
 	private void	OnTriggerEnter(Collider other){
+		if (other.gameObject.CompareTag("IgnoreShot"))
+			return ;
+
 		if (other.gameObject.CompareTag("Enemy"))
 			other.gameObject.GetComponent<EnemyAi>().TakeDamage();
+
 		if (!other.gameObject.CompareTag("Player"))
 			Destroy(gameObject);
 	}

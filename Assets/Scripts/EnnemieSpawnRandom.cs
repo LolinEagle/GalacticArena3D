@@ -2,16 +2,23 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class EnnemieSpawnRandom : MonoBehaviour{
+	[Header("Ennemie Spawn Settings")]
 	[SerializeField] private GameObject	ennemiePrefab;
 	[SerializeField] private float		spawnRate;
 
+	[Header("Bonus Spawn Settings")]
+	[SerializeField] private GameObject	bonusPrefab;
+	[SerializeField] private float		spawnRateBonus;
+
 	private float					spawnRandom;	// Timestamp when to spawn
+	private float					spawnRandomBonus;
 	private NavMeshTriangulation	t;				// NavMesh data
 	private float[]					cumulativeAreas;// Areas of each triangles
 	private float					totalArea;		// Total area of the NavMesh
 
 	void	Start(){
 		spawnRandom = Time.time + spawnRate;
+		spawnRandomBonus = Time.time + spawnRateBonus;
 		t = NavMesh.CalculateTriangulation();
 
 		// Pre-calculate areas for weighted selection
@@ -61,6 +68,10 @@ public class EnnemieSpawnRandom : MonoBehaviour{
 		if (Time.time >= spawnRandom){
 			Instantiate(ennemiePrefab, GetRandomPoint(), Quaternion.identity);
 			spawnRandom = Time.time + spawnRate;
+		}
+		if (Time.time >= spawnRandomBonus){
+			Instantiate(bonusPrefab, GetRandomPoint(), Quaternion.identity);
+			spawnRandomBonus = Time.time + spawnRateBonus;
 		}
 	}
 }

@@ -26,10 +26,6 @@ public class MovementBehaviour : MonoBehaviour{
 		targetRotation = Quaternion.Euler(0f, 0f, 0f);
 	}
 
-	void	MovePlayer(Vector3 direction){
-		rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
-	}
-
 	void	Update(){
 		// Rotate
 		Vector2	mousePos = Mouse.current.position.ReadValue();
@@ -40,10 +36,12 @@ public class MovementBehaviour : MonoBehaviour{
 
 		// Shot
 		if (Mouse.current.leftButton.isPressed && Time.time >= nextFireTime){
-			GameObject	shot = Instantiate(shotPrefab);
-			shot.transform.position = cannon.position;
-			shot.transform.rotation = transform.rotation;
-			interactBehaviour.PlayShot();
+			if (playerStats.multishot > 0){
+				Shot(12f);
+				Shot(-12f);
+				playerStats.multishot--;
+			}
+			Shot();
 			nextFireTime = Time.time + (1f / shotsPerSecond);
 		}
 
@@ -90,5 +88,16 @@ public class MovementBehaviour : MonoBehaviour{
 
 		// Apply rotation
 		rb.MoveRotation(targetRotation);
+	}
+
+	void	Shot(float offset = 0f){
+		GameObject	shot = Instantiate(shotPrefab);
+		shot.transform.position = cannon.position;
+		shot.transform.rotation = transform.rotation * Quaternion.Euler(0f, offset, 0f);
+		interactBehaviour.PlayShot();
+	}
+
+	void	MovePlayer(Vector3 direction){
+		rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
 	}
 }

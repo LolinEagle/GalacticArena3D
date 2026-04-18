@@ -3,11 +3,12 @@ using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour{
 	[Header("Stats")]
-	public float	heal = 100f;
-	private float	tp = 0f;
-	private float	tpTime;
-	private float	tpRecovery = 15f;
-	public int		score = 0;
+	public float					heal = 100f;
+	private float					tp;
+	private float					tpTime;
+	[SerializeField] private float	tpRecovery = 15f;
+	public int						score;
+	public int						multishot;
 
 	void	Awake(){
 		tpTime = Time.time - tpRecovery;
@@ -16,7 +17,7 @@ public class PlayerStats : MonoBehaviour{
 	void	Update(){
 		// Heal
 		if (heal <= 0f)
-			SceneManager.LoadScene("Level");
+			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
 		// Teleportation
 		tp = Mathf.Min(Time.time - tpTime, tpRecovery);
@@ -36,5 +37,9 @@ public class PlayerStats : MonoBehaviour{
 
 	public void		Tp(){
 		tpTime = Time.time;
+	}
+
+	public void		BonusTp(){
+		tpTime = Time.time - tpRecovery;
 	}
 }
