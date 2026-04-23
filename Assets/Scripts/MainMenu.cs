@@ -69,7 +69,7 @@ public class MainMenu : MonoBehaviour{
 	public void	NewGame(){
 		loadSavedData = false;
 		Time.timeScale = 1;
-		SceneManager.LoadScene("Level");
+		SceneManager.LoadScene("Level1");
 	}
 
 	public void	QuitGame(){
