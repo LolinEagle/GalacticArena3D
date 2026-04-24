@@ -8,15 +8,9 @@ public class MainMenu : MonoBehaviour{
 	[SerializeField] private Dropdown	resolutionsDropdown;
 	[SerializeField] private AudioMixer	audioMixer;
 	[SerializeField] private Slider		soundSlider;
+	[SerializeField] private GameObject	menuPanel;
 	[SerializeField] private GameObject	optionsPanel;
 	[SerializeField] private Toggle		fullScreenToggle;
-
-	[Header("heads-up display")]
-	[SerializeField] private GameObject	hud;
-	[SerializeField] private GameObject	inventoryPanel;
-	[SerializeField] private GameObject	craftingPanel;
-	[SerializeField] private GameObject	tooltip;
-	[SerializeField] private GameObject	itemActionPanel;
 
 	public static bool	loadSavedData;
 	private List<int>	resolutionIndex = new List<int>();
@@ -54,18 +48,6 @@ public class MainMenu : MonoBehaviour{
 		fullScreenToggle.isOn = Screen.fullScreen;
 	}
 
-	void		OnEnable(){
-		if (hud != null) hud.SetActive(false);
-		if (inventoryPanel != null) inventoryPanel.SetActive(false);
-		if (craftingPanel != null) craftingPanel.SetActive(false);
-		if (tooltip != null) tooltip.SetActive(false);
-		if (itemActionPanel != null) itemActionPanel.SetActive(false);
-	}
-
-	void		OnDisable(){
-		if (hud != null) hud.SetActive(true);
-	}
-
 	public void	NewGame(){
 		loadSavedData = false;
 		Time.timeScale = 1;
@@ -99,6 +81,7 @@ public class MainMenu : MonoBehaviour{
 	}
 
 	public void	EnableDisableOptionsPanel(){
+		menuPanel.SetActive(!menuPanel.activeSelf);
 		optionsPanel.SetActive(!optionsPanel.activeSelf);
 	}
 }

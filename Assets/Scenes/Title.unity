@@ -4546,6 +4546,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 574388207171117735, guid: 63f07a66b40c0f54d8786a8bd8589eed, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 574388207171117735, guid: 63f07a66b40c0f54d8786a8bd8589eed, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 574388207171117735, guid: 63f07a66b40c0f54d8786a8bd8589eed, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 620704103756183102, guid: 63f07a66b40c0f54d8786a8bd8589eed, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4677,6 +4689,14 @@ PrefabInstance:
     - target: {fileID: 4666685392887664934, guid: 63f07a66b40c0f54d8786a8bd8589eed, type: 3}
       propertyPath: m_Name
       value: TitleCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5616360197257400767, guid: 63f07a66b40c0f54d8786a8bd8589eed, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5616360197257400767, guid: 63f07a66b40c0f54d8786a8bd8589eed, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8058014130077017300, guid: 63f07a66b40c0f54d8786a8bd8589eed, type: 3}
       propertyPath: m_AnchorMax.y
