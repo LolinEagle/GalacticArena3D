@@ -1,24 +1,36 @@
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using System.Collections.Generic;
-using UnityEngine.Audio;
 
 public class MainMenu : MonoBehaviour{
-	[SerializeField] private Dropdown	resolutionsDropdown;
-	[SerializeField] private AudioMixer	audioMixer;
-	[SerializeField] private Slider		soundSlider;
-	[SerializeField] private GameObject	menuPanel;
-	[SerializeField] private GameObject	optionsPanel;
-	[SerializeField] private Toggle		fullScreenToggle;
+	// Audio 
+	[SerializeField] private AudioMixer		musicMixer;
+	[SerializeField] private AudioMixer		sfxMixer;
+	[SerializeField] private Slider			soundSlider;
+	[SerializeField] private Slider			sfxSlider;
+
+	// Resolutions dropdown
+	[SerializeField] private TMP_Dropdown	resolutionsDropdown;
+
+	// Full Screen
+	[SerializeField] private Toggle			fullScreenToggle;
+
+	// Panels
+	[SerializeField] private GameObject		menuPanel;
+	[SerializeField] private GameObject		optionsPanel;
 
 	public static bool	loadSavedData;
 	private List<int>	resolutionIndex = new List<int>();
 
 	void		Start(){
 		// Volume
-		audioMixer.GetFloat("Volume", out float soundValue);
+		musicMixer.GetFloat("Volume", out float soundValue);
+		sfxMixer.GetFloat("Sfx", out float sfxValue);
 		soundSlider.value = soundValue;
+		sfxSlider.value = sfxValue;
 
 		// Resolutions
 		Resolution[]	res = Screen.resolutions;
@@ -37,14 +49,14 @@ public class MainMenu : MonoBehaviour{
 
 			resolutionOptrion.Add(option);
 			resolutionIndex.Add(i);
-			if (res[i].width == Screen.width && res[i].height == Screen.height){
+			if (res[i].width == Screen.width && res[i].height == Screen.height)
 				currentResolutionIndex = i;
-			}
 		}
 		resolutionsDropdown.AddOptions(resolutionOptrion);
 		resolutionsDropdown.value = currentResolutionIndex;
 		resolutionsDropdown.RefreshShownValue();
 
+		// Full Screen
 		fullScreenToggle.isOn = Screen.fullScreen;
 	}
 
@@ -62,10 +74,6 @@ public class MainMenu : MonoBehaviour{
 		SceneManager.LoadScene("Title");
 	}
 
-	public void	SetQuality(int qualityIndex){
-		QualitySettings.SetQualityLevel(qualityIndex);
-	}
-
 	public void	SetResolution(int i){
 		Resolution	res = Screen.resolutions[resolutionIndex[i]];
 
@@ -77,7 +85,11 @@ public class MainMenu : MonoBehaviour{
 	}
 
 	public void	SetVolume(float volume){
-		audioMixer.SetFloat("Volume", volume);
+		musicMixer.SetFloat("Volume", volume);
+	}
+
+	public void	SetSfx(float volume){
+		sfxMixer.SetFloat("Sfx", volume);
 	}
 
 	public void	EnableDisableOptionsPanel(){
