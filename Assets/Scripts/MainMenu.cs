@@ -6,24 +6,18 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour{
-	// Audio 
+	// Options
 	[SerializeField] private AudioMixer		musicMixer;
 	[SerializeField] private AudioMixer		sfxMixer;
 	[SerializeField] private Slider			soundSlider;
 	[SerializeField] private Slider			sfxSlider;
-
-	// Resolutions dropdown
 	[SerializeField] private TMP_Dropdown	resolutionsDropdown;
-
-	// Full Screen
 	[SerializeField] private Toggle			fullScreenToggle;
-
-	// Panels
-	[SerializeField] private GameObject		menuPanel;
 	[SerializeField] private GameObject		optionsPanel;
 
-	public static bool	loadSavedData;
 	private List<int>	resolutionIndex = new List<int>();
+	private GameObject	menuPanel;
+	private PauseMenu	pauseMenu;
 
 	void		Start(){
 		// Volume
@@ -58,22 +52,39 @@ public class MainMenu : MonoBehaviour{
 
 		// Full Screen
 		fullScreenToggle.isOn = Screen.fullScreen;
+
+		// Menu
+		menuPanel = transform.gameObject;
+		pauseMenu = FindAnyObjectByType<PauseMenu>();
 	}
 
+	// Buttons
 	public void	NewGame(){
-		loadSavedData = false;
-		Time.timeScale = 1;
 		SceneManager.LoadScene("Level1");
+	}
+
+	public void	ContinueGame(){
+
+	}
+
+	public void	EnableDisableOptionsPanel(){
+		menuPanel.SetActive(!menuPanel.activeSelf);
+		optionsPanel.SetActive(!optionsPanel.activeSelf);
 	}
 
 	public void	QuitGame(){
 		Application.Quit();
 	}
 
-	public void LoadMainMenu(){
+	public void	ReturnGame(){
+		pauseMenu.ClosePauseMenu();
+	}
+
+	public void	LoadMainMenu(){
 		SceneManager.LoadScene("Title");
 	}
 
+	// Options
 	public void	SetResolution(int i){
 		Resolution	res = Screen.resolutions[resolutionIndex[i]];
 
@@ -82,6 +93,7 @@ public class MainMenu : MonoBehaviour{
 
 	public void	SetFullScreen(bool isFullScreen){
 		Screen.fullScreen = isFullScreen;
+		fullScreenToggle.SetIsOnWithoutNotify(isFullScreen);
 	}
 
 	public void	SetVolume(float volume){
@@ -90,10 +102,5 @@ public class MainMenu : MonoBehaviour{
 
 	public void	SetSfx(float volume){
 		sfxMixer.SetFloat("Sfx", volume);
-	}
-
-	public void	EnableDisableOptionsPanel(){
-		menuPanel.SetActive(!menuPanel.activeSelf);
-		optionsPanel.SetActive(!optionsPanel.activeSelf);
 	}
 }
