@@ -230,8 +230,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4294271535
+  m_fontColor: {r: 0.18431373, g: 0.38431376, b: 0.9607844, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1307,9 +1307,7 @@ MonoBehaviour:
   sfxSlider: {fileID: 3254647959320853721}
   resolutionsDropdown: {fileID: 3448642689238427332}
   fullScreenToggle: {fileID: 4980475900923650018}
-  menuPanel: {fileID: 2135322998370163638}
   optionsPanel: {fileID: 308006220058390069}
-  loadGameButton: {fileID: 5355607671702955225}
 --- !u!1 &2166901946634416773
 GameObject:
   m_ObjectHideFlags: 0
@@ -4672,8 +4670,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 452984831
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.101960786}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4690,8 +4688,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48
-  m_fontSizeBase: 48
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

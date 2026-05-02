@@ -28,14 +28,15 @@ public class MovementBehaviour : MonoBehaviour{
 
 	void	Update(){
 		// Rotate
-		Vector2	mousePos = Mouse.current.position.ReadValue();
+		Mouse	mb = Mouse.current;
+		Vector2	mousePos = mb.position.ReadValue();
 		Vector2	center = new Vector2(Screen.width / 2f, Screen.height / 2f);
 		Vector2	direction = mousePos - center;
 		float	angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 		targetRotation = Quaternion.Euler(0f, -angle, 0f);
 
 		// Shot
-		if (Mouse.current.leftButton.isPressed && Time.time >= nextFireTime){
+		if (mb.leftButton.isPressed && Time.time >= nextFireTime){
 			if (playerStats.multishot > 0){
 				Shot(12f);
 				Shot(-12f);
@@ -46,7 +47,7 @@ public class MovementBehaviour : MonoBehaviour{
 		}
 
 		// Teleportation
-		if (Mouse.current.rightButton.isPressed && playerStats.CanTp()){
+		if (mb.rightButton.wasPressedThisFrame && playerStats.CanTp()){
 			// Create a ray from the camera through the mouse position
 			Ray			ray = Camera.main.ScreenPointToRay(mousePos);
 			RaycastHit	hit;

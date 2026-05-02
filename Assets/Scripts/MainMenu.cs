@@ -60,11 +60,12 @@ public class MainMenu : MonoBehaviour{
 
 	// Buttons
 	public void	NewGame(){
+		Time.timeScale = 1f;
 		SceneManager.LoadScene("Level1");
 	}
 
 	public void	ContinueGame(){
-
+		Time.timeScale = 1f;
 	}
 
 	public void	EnableDisableOptionsPanel(){
