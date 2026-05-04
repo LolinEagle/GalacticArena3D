@@ -49,7 +49,7 @@ public class EnemyAi : MonoBehaviour{
 			return ;
 		if (--currentHealth <= 0){
 			// Die
-			player.GetComponent<InteractBehaviour>().PlayDie();
+			player.GetComponent<PlayerAudio>().PlayDie();
 			player.GetComponent<PlayerStats>().score++;
 			Destroy(gameObject);
 		} else {

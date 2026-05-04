@@ -11,7 +11,7 @@ public class PauseMenu : MonoBehaviour{
 
 	void Awake(){
 		if (instance != null && instance != this){
-			Debug.LogError("Multiple instances of PauseMenu detected.");
+			Debug.LogError("Multiple instances of PauseMenu detected");
 			Destroy(this.gameObject);
 		} else {
 			instance = this;

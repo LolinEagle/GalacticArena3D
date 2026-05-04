@@ -3,18 +3,32 @@ using UnityEngine.AI;
 
 public class EnnemieSpawnRandom : MonoBehaviour{
 	[Header("Ennemie Spawn Settings")]
+	[SerializeField] private bool		ennemieIsSpawning = true;
 	[SerializeField] private GameObject	ennemiePrefab;
 	[SerializeField] private float		spawnRate;
 
 	[Header("Bonus Spawn Settings")]
+	[SerializeField] private bool		bonusIsSpawning = true;
 	[SerializeField] private GameObject	bonusPrefab;
 	[SerializeField] private float		spawnRateBonus;
 
-	private float					spawnRandom;	// Timestamp when to spawn
-	private float					spawnRandomBonus;
+	private static EnnemieSpawnRandom	instance = null;// Singleton pattern
+
+	public float	spawnRandom;		// Timestamp of the spawn of ennemie
+	public float	spawnRandomBonus;	// Timestamp of the spawn of bonus
+
 	private NavMeshTriangulation	t;				// NavMesh data
 	private float[]					cumulativeAreas;// Areas of each triangles
 	private float					totalArea;		// Total area of the NavMesh
+
+	void Awake(){
+		if (instance != null && instance != this){
+			Debug.LogError("Multiple instances of EnnemieSpawnRandom detected");
+			Destroy(this.gameObject);
+		} else {
+			instance = this;
+		}
+	}
 
 	void	Start(){
 		spawnRandom = Time.time + spawnRate;
@@ -65,11 +79,11 @@ public class EnnemieSpawnRandom : MonoBehaviour{
 	}
 
 	void	Update(){
-		if (Time.time >= spawnRandom){
+		if (ennemieIsSpawning && Time.time >= spawnRandom){
 			Instantiate(ennemiePrefab, GetRandomPoint(), Quaternion.identity);
 			spawnRandom = Time.time + spawnRate;
 		}
-		if (Time.time >= spawnRandomBonus){
+		if (bonusIsSpawning && Time.time >= spawnRandomBonus){
 			Instantiate(bonusPrefab, GetRandomPoint(), Quaternion.identity);
 			spawnRandomBonus = Time.time + spawnRateBonus;
 		}

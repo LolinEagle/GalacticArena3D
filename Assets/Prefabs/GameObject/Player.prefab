@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   shotPrefab: {fileID: 2849841699194630160, guid: 0f91ae3b04c546c4f8d74bd954d80671, type: 3}
-  interactBehaviour: {fileID: 2214993099729101230}
+  playerAudio: {fileID: 2214993099729101230}
   cannon: {fileID: 7014849528142706652}
   speed: 6
   shotsPerSecond: 6
@@ -291,8 +291,21 @@ MonoBehaviour:
   heal: 100
   maxHeal: 300
   tpRecovery: 15
-  score: 0
   multishot: 0
+  score: 0
+  levels:
+  - useScore: 1
+    scoreToPass: 100
+    targetRoom: Level2
+  - useScore: 1
+    scoreToPass: 100
+    targetRoom: Level3
+  - useScore: 1
+    scoreToPass: 120
+    targetRoom: Level4
+  - useScore: 0
+    scoreToPass: 0
+    targetRoom: Credit
 --- !u!1 &6080242332217092839
 GameObject:
   m_ObjectHideFlags: 0

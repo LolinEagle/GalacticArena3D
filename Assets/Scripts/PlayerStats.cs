@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour{
 	[Header("Stats")]
@@ -8,11 +9,23 @@ public class PlayerStats : MonoBehaviour{
 	private float					tp;
 	private float					tpTime;
 	[SerializeField] private float	tpRecovery = 15f;
-	public int						score;
 	public int						multishot;
+
+	[Header("Current score")]
+	public int	score;
+
+	[Header("Levels list")]
+	[SerializeField] private Level[]	levels;
+	
+	private EnnemieSpawnRandom	ennemieSpawnRandom;
+	private Image				levelEndScreen;
+	private float				iLevelEnded = 0f;
+	private bool				levelEnded = false;
 
 	void	Awake(){
 		tpTime = Time.time - tpRecovery;
+		ennemieSpawnRandom = FindAnyObjectByType<EnnemieSpawnRandom>();
+		levelEndScreen = GameObject.FindGameObjectWithTag("Finish")?.GetComponent<Image>();
 	}
 
 	void	Update(){
@@ -25,8 +38,26 @@ public class PlayerStats : MonoBehaviour{
 		tp = Mathf.Min(Time.time - tpTime, tpRecovery);
 
 		// Score
-		if (score >= 100)
-			SceneManager.LoadScene("Title");
+		Level	level = levels[SceneManager.GetActiveScene().buildIndex - 1];
+		if (level.useScore && score >= level.scoreToPass){
+			if (levelEnded == false){
+				ennemieSpawnRandom.spawnRandom = float.MaxValue;
+				ennemieSpawnRandom.spawnRandomBonus = float.MaxValue;
+
+				GameObject[]	allEnemy = GameObject.FindGameObjectsWithTag("Enemy");
+				foreach (GameObject foe in allEnemy)
+					Destroy(foe);
+
+				iLevelEnded = Time.time + 5f;
+				levelEnded = true;
+			}
+			Color	tmp = levelEndScreen.color;
+			tmp.a = 1f - ((iLevelEnded - Time.time) / 5f);
+			levelEndScreen.color = tmp;
+
+			if (Time.time >= iLevelEnded)
+				SceneManager.LoadScene(level.targetRoom);
+		}
 	}
 
 	public float	GetTp(){
@@ -47,5 +78,12 @@ public class PlayerStats : MonoBehaviour{
 
 	public void		BonusTp(){
 		tpTime = Time.time - tpRecovery;
+	}
+
+	[System.Serializable]
+	public class Level{
+		public bool		useScore = true;
+		public int		scoreToPass = 100;
+		public string	targetRoom;
 	}
 }

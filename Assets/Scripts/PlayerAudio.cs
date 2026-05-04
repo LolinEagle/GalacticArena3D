@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class InteractBehaviour : MonoBehaviour{
+public class PlayerAudio : MonoBehaviour{
 	[SerializeField] private AudioSource	audioSource;
 	[SerializeField] private AudioClip		shotSound;
 	[SerializeField] private AudioClip		teleportationSound;
