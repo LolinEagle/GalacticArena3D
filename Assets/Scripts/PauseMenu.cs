@@ -9,7 +9,7 @@ public class PauseMenu : MonoBehaviour{
 
 	private bool	isMenuOpen = false;
 
-	void Awake(){
+	private void	Awake(){
 		if (instance != null && instance != this){
 			Debug.LogError("Multiple instances of PauseMenu detected");
 			Destroy(this.gameObject);
@@ -18,19 +18,19 @@ public class PauseMenu : MonoBehaviour{
 		}
 	}
 
-	void Update(){
+	private void	Update(){
 		if (Keyboard.current.escapeKey.wasPressedThisFrame)
 			OpenClosePauseMenu();
 	}
 
-	public void OpenClosePauseMenu(){
+	public void		OpenClosePauseMenu(){
 		isMenuOpen = !isMenuOpen;
 		pauseMenu.SetActive(isMenuOpen);
 		levelBox.SetActive(!isMenuOpen);
 		Time.timeScale = isMenuOpen ? 0 : 1;
 	}
 
-	public void ClosePauseMenu(){
+	public void		ClosePauseMenu(){
 		isMenuOpen = false;
 		pauseMenu.SetActive(false);
 		levelBox.SetActive(true);

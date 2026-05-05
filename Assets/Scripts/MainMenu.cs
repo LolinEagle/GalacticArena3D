@@ -15,11 +15,22 @@ public class MainMenu : MonoBehaviour{
 	[SerializeField] private Toggle			fullScreenToggle;
 	[SerializeField] private GameObject		optionsPanel;
 
+	private static MainMenu	instance = null;// Singleton pattern
+
 	private List<int>	resolutionIndex = new List<int>();
 	private GameObject	menuPanel;
 	private PauseMenu	pauseMenu;
 
-	void		Start(){
+	private void	Awake(){
+		if (instance != null && instance != this){
+			Debug.LogError("Multiple instances of UIManager detected");
+			Destroy(this.gameObject);
+		} else {
+			instance = this;
+		}
+	}
+
+	private void	Start(){
 		// Volume
 		musicMixer.GetFloat("Volume", out float soundValue);
 		sfxMixer.GetFloat("Sfx", out float sfxValue);

@@ -4,30 +4,45 @@ using UnityEngine.InputSystem;
 
 public class PlayerBasicBehaviour : MonoBehaviour{
 	[Header("References")]
-	[SerializeField] private GameObject		shotPrefab;
-	[SerializeField] private PlayerAudio	playerAudio;
-	[SerializeField] private Transform		cannon;
+	[SerializeField] private GameObject	shotPrefab;
+	[SerializeField] private Transform	cannon;
 
 	[Header("Property")]
-	[SerializeField] private float	speed = 5f;
+	[SerializeField] private float	speed;
 	[SerializeField] private float	shotsPerSecond;
 
-	private float		nextFireTime;
-	private Transform	playerCamera;
-	private Rigidbody	rb;
-	private PlayerStats	playerStats;
-	Vector3				moveInput;
-	private Quaternion	targetRotation;// Store rotation for FixedUpdate
+	private static PlayerBasicBehaviour	instance = null;// Singleton pattern
 
-	void	Start(){
-		nextFireTime = 0f;
-		playerCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
+	// Component
+	private Rigidbody	rb;
+	private PlayerAudio	playerAudio;
+	private PlayerStats	playerStats;
+	private Transform	playerCamera;
+
+	Vector3				moveInput;		// Movement direction
+	private Quaternion	targetRotation;	// Store rotation for FixedUpdate
+	private float		nextFireTime;	// Timestamp of the time player can fire
+
+	private void	Awake(){
+		if (instance != null && instance != this){
+			Debug.LogError("Multiple instances of Player detected");
+			Destroy(this.gameObject);
+		} else {
+			instance = this;
+		}
+
 		rb = GetComponent<Rigidbody>();
+		playerAudio = GetComponent<PlayerAudio>();
 		playerStats = GetComponent<PlayerStats>();
-		targetRotation = Quaternion.Euler(0f, 0f, 0f);
 	}
 
-	void	Update(){
+	private void	Start(){
+		playerCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
+		targetRotation = Quaternion.Euler(0f, 0f, 0f);
+		nextFireTime = 0f;
+	}
+
+	private void	Update(){
 		// Move
 		moveInput = Vector3.zero;
 		if (Keyboard.current.wKey.isPressed) moveInput += Vector3.forward;
@@ -80,11 +95,11 @@ public class PlayerBasicBehaviour : MonoBehaviour{
 		}
 	}
 
-	void	LateUpdate(){
+	private void	LateUpdate(){
 		playerCamera.position = transform.position + new Vector3(0, 8f, 0);
 	}
 
-	void	FixedUpdate(){
+	private void	FixedUpdate(){
 		// Move
 		if (moveInput != Vector3.zero)
 			MovePlayer(moveInput.normalized);
@@ -93,14 +108,14 @@ public class PlayerBasicBehaviour : MonoBehaviour{
 		rb.MoveRotation(targetRotation);
 	}
 
-	void	Shot(float offset = 0f){
+	private void	Shot(float offset = 0f){
 		Transform	t = Instantiate(shotPrefab).transform;
 		t.position = cannon.position;
 		t.rotation = transform.rotation * Quaternion.Euler(0f, offset, 0f);
 		playerAudio.PlayShot();
 	}
 
-	void	MovePlayer(Vector3 direction){
+	private void	MovePlayer(Vector3 direction){
 		rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
 	}
 }

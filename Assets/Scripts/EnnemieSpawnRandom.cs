@@ -21,7 +21,7 @@ public class EnnemieSpawnRandom : MonoBehaviour{
 	private float[]					cumulativeAreas;// Areas of each triangles
 	private float					totalArea;		// Total area of the NavMesh
 
-	void Awake(){
+	private void	Awake(){
 		if (instance != null && instance != this){
 			Debug.LogError("Multiple instances of EnnemieSpawnRandom detected");
 			Destroy(this.gameObject);
@@ -30,7 +30,7 @@ public class EnnemieSpawnRandom : MonoBehaviour{
 		}
 	}
 
-	void	Start(){
+	private void	Start(){
 		spawnRandom = Time.time + spawnRate;
 		spawnRandomBonus = Time.time + spawnRateBonus;
 		t = NavMesh.CalculateTriangulation();
@@ -78,7 +78,7 @@ public class EnnemieSpawnRandom : MonoBehaviour{
 		return (GetRandomPointTriangle(a, b, c));
 	}
 
-	void	Update(){
+	private void	Update(){
 		if (ennemieIsSpawning && Time.time >= spawnRandom){
 			Instantiate(ennemiePrefab, GetRandomPoint(), Quaternion.identity);
 			spawnRandom = Time.time + spawnRate;

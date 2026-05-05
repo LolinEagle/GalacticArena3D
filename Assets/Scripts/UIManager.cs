@@ -3,9 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour{
-	[Header("References")]
-	[SerializeField] private PlayerStats	playerStats;
-
 	[Header("Player Health")]
 	[SerializeField] private TMP_Text		healText;
 	[SerializeField] private Image			healBar1;
@@ -25,14 +22,28 @@ public class UIManager : MonoBehaviour{
 	[SerializeField] private TMP_Text		scoreText;
 	[SerializeField] private GameObject		levelTextBox;
 
-	private string	objective = "100";
-	private float	timeStamp;
+	private static UIManager	instance = null;// Singleton pattern
 
-	void	Start(){
+	private PlayerStats	playerStats;
+	private string		objective = "100";
+	private float		timeStamp;
+
+	private void	Awake(){
+		if (instance != null && instance != this){
+			Debug.LogError("Multiple instances of UIManager detected");
+			Destroy(this.gameObject);
+		} else {
+			instance = this;
+		}
+
 		timeStamp = Time.time;
 	}
 
-	void	Update(){
+	private void	Start(){
+		playerStats = FindAnyObjectByType<PlayerStats>();
+	}
+
+	private void	Update(){
 		// Player Health
 		if (playerStats.heal >= 0f)
 			HealBarText.text = playerStats.heal.ToString();

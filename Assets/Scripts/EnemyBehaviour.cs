@@ -26,7 +26,7 @@ public class EnemyAi : MonoBehaviour{
 		material = GetComponent<Renderer>().material;
 	}
 
-	void			FixedUpdate(){
+	private void	FixedUpdate(){
 		if (IsSpawn()){
 			agent.SetDestination(player.position);
 		} else {

@@ -6,7 +6,7 @@ public class Bonus : MonoBehaviour{
 	[SerializeField] private GameObject	model;		// Child plane model
 	[SerializeField] private Material[]	materials;	// List for child materials
 
-	void Start(){
+	private void	Start(){
 		typeBonus = Random.Range(0, 3);
 		material = GetComponent<Renderer>().material;
 		switch (typeBonus){

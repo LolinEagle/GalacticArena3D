@@ -4,11 +4,11 @@ public class shotBehaviour : MonoBehaviour{
 	[SerializeField] private float	speed = 5f;
 	private Rigidbody				rb;
 
-	void	Start(){
+	private void	Start(){
 		rb = GetComponent<Rigidbody>();
 	}
 
-	void	Update(){
+	private void	Update(){
 		rb.MovePosition(rb.position + transform.right * speed * Time.deltaTime);
 	}
 

@@ -22,13 +22,13 @@ public class PlayerStats : MonoBehaviour{
 	private float				iLevelEnded = 0f;
 	private bool				levelEnded = false;
 
-	void	Awake(){
+	private void	Awake(){
 		tpTime = Time.time - tpRecovery;
 		ennemieSpawnRandom = FindAnyObjectByType<EnnemieSpawnRandom>();
 		levelEndScreen = GameObject.FindGameObjectWithTag("Finish")?.GetComponent<Image>();
 	}
 
-	void	Update(){
+	private void	Update(){
 		// Heal
 		heal = Mathf.Min(heal, maxHeal);
 		if (heal <= 0f)
