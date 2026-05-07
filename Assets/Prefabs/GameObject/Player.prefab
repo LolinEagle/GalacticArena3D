@@ -256,7 +256,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   shotPrefab: {fileID: 2849841699194630160, guid: 0f91ae3b04c546c4f8d74bd954d80671, type: 3}
-  playerAudio: {fileID: 2214993099729101230}
   cannon: {fileID: 7014849528142706652}
   speed: 6
   shotsPerSecond: 6

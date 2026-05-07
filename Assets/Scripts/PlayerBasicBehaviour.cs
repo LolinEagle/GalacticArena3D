@@ -18,6 +18,7 @@ public class PlayerBasicBehaviour : MonoBehaviour{
 	private PlayerAudio	playerAudio;
 	private PlayerStats	playerStats;
 	private Transform	playerCamera;
+	private Transform	parent;
 
 	Vector3				moveInput;		// Movement direction
 	private Quaternion	targetRotation;	// Store rotation for FixedUpdate
@@ -34,6 +35,7 @@ public class PlayerBasicBehaviour : MonoBehaviour{
 		rb = GetComponent<Rigidbody>();
 		playerAudio = GetComponent<PlayerAudio>();
 		playerStats = GetComponent<PlayerStats>();
+		parent = GameObject.FindGameObjectWithTag("InstantiateLayer").transform;
 	}
 
 	private void	Start(){
@@ -57,6 +59,9 @@ public class PlayerBasicBehaviour : MonoBehaviour{
 		Vector2	direction = mousePos - center;
 		float	angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 		targetRotation = Quaternion.Euler(0f, -angle, 0f);
+
+		if (Time.timeScale <= 0f)
+			return;
 
 		// Shot
 		if (mb.leftButton.isPressed && Time.time >= nextFireTime){
@@ -109,7 +114,7 @@ public class PlayerBasicBehaviour : MonoBehaviour{
 	}
 
 	private void	Shot(float offset = 0f){
-		Transform	t = Instantiate(shotPrefab).transform;
+		Transform	t = Instantiate(shotPrefab, parent).transform;
 		t.position = cannon.position;
 		t.rotation = transform.rotation * Quaternion.Euler(0f, offset, 0f);
 		playerAudio.PlayShot();

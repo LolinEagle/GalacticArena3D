@@ -17,6 +17,7 @@ public class EnnemieSpawnRandom : MonoBehaviour{
 	public float	spawnRandom;		// Timestamp of the spawn of ennemie
 	public float	spawnRandomBonus;	// Timestamp of the spawn of bonus
 
+	private Transform				parent;
 	private NavMeshTriangulation	t;				// NavMesh data
 	private float[]					cumulativeAreas;// Areas of each triangles
 	private float					totalArea;		// Total area of the NavMesh
@@ -28,6 +29,8 @@ public class EnnemieSpawnRandom : MonoBehaviour{
 		} else {
 			instance = this;
 		}
+
+		parent = GameObject.FindGameObjectWithTag("InstantiateLayer").transform;
 	}
 
 	private void	Start(){
@@ -80,11 +83,15 @@ public class EnnemieSpawnRandom : MonoBehaviour{
 
 	private void	Update(){
 		if (ennemieIsSpawning && Time.time >= spawnRandom){
-			Instantiate(ennemiePrefab, GetRandomPoint(), Quaternion.identity);
+			Instantiate(
+				ennemiePrefab, GetRandomPoint(), Quaternion.identity, parent
+			);
 			spawnRandom = Time.time + spawnRate;
 		}
 		if (bonusIsSpawning && Time.time >= spawnRandomBonus){
-			Instantiate(bonusPrefab, GetRandomPoint(), Quaternion.identity);
+			Instantiate(
+				bonusPrefab, GetRandomPoint(), Quaternion.identity, parent
+			);
 			spawnRandomBonus = Time.time + spawnRateBonus;
 		}
 	}
