@@ -257,8 +257,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   shotPrefab: {fileID: 2849841699194630160, guid: 0f91ae3b04c546c4f8d74bd954d80671, type: 3}
   cannon: {fileID: 7014849528142706652}
-  speed: 6
+  speed: 8
   shotsPerSecond: 6
+  cameraDistance: 10.25
 --- !u!114 &2214993099729101230
 MonoBehaviour:
   m_ObjectHideFlags: 0

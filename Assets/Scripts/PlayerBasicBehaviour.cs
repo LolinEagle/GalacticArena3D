@@ -10,6 +10,7 @@ public class PlayerBasicBehaviour : MonoBehaviour{
 	[Header("Property")]
 	[SerializeField] private float	speed;
 	[SerializeField] private float	shotsPerSecond;
+	[SerializeField] private float	cameraDistance = 10.25f;
 
 	private static PlayerBasicBehaviour	instance = null;// Singleton pattern
 
@@ -101,7 +102,9 @@ public class PlayerBasicBehaviour : MonoBehaviour{
 	}
 
 	private void	LateUpdate(){
-		playerCamera.position = transform.position + new Vector3(0, 8f, 0);
+		playerCamera.position = transform.position + new Vector3(
+			0f, cameraDistance, 0f
+		);
 	}
 
 	private void	FixedUpdate(){

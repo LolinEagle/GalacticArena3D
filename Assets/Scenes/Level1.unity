@@ -321,13 +321,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6769222073227361030, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
       propertyPath: m_Name
       value: CubeTileDark
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769222073227361030, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -358,7 +358,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2202865837830782517, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
       propertyPath: TilingY
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 913975343168842545, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
       propertyPath: m_LocalScale.x
@@ -366,7 +366,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 913975343168842545, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
       propertyPath: m_LocalScale.z
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 913975343168842545, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -378,7 +378,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 913975343168842545, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 913975343168842545, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -647,7 +647,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2202865837830782517, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
       propertyPath: TilingY
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 913975343168842545, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
       propertyPath: m_LocalScale.x
@@ -655,7 +655,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 913975343168842545, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
       propertyPath: m_LocalScale.z
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 913975343168842545, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -667,7 +667,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 913975343168842545, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 913975343168842545, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -731,23 +731,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -2202865837830782517, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
       propertyPath: TilingX
-      value: 8
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: -2202865837830782517, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
       propertyPath: TilingY
-      value: 26
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 913975343168842545, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
       propertyPath: m_LocalScale.x
-      value: 8
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 913975343168842545, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
       propertyPath: m_LocalScale.z
-      value: 26
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 913975343168842545, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 913975343168842545, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1771,6 +1771,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CubeTileDark
       objectReference: {fileID: 0}
+    - target: {fileID: 6769222073227361030, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2101,23 +2105,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -2202865837830782517, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
       propertyPath: TilingX
-      value: 8
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: -2202865837830782517, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
       propertyPath: TilingY
-      value: 26
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 913975343168842545, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
       propertyPath: m_LocalScale.x
-      value: 8
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 913975343168842545, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
       propertyPath: m_LocalScale.z
-      value: 26
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 913975343168842545, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20
+      value: -22
       objectReference: {fileID: 0}
     - target: {fileID: 913975343168842545, guid: 3e0820b813ad8b8498b9628dc57d506b, type: 3}
       propertyPath: m_LocalPosition.y
