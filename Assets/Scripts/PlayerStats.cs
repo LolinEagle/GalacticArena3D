@@ -19,13 +19,19 @@ public class PlayerStats : MonoBehaviour{
 	
 	private EnnemieSpawnRandom	ennemieSpawnRandom;
 	private Image				levelEndScreen;
+	private	Level				level;
 	private float				iLevelEnded = 0f;
 	private bool				levelEnded = false;
 
 	private void	Awake(){
 		tpTime = Time.time - tpRecovery;
 		ennemieSpawnRandom = FindAnyObjectByType<EnnemieSpawnRandom>();
-		levelEndScreen = GameObject.FindGameObjectWithTag("Finish")?.GetComponent<Image>();
+		levelEndScreen =
+			GameObject.FindGameObjectWithTag("Finish")?.GetComponent<Image>();
+		level = levels[SceneManager.GetActiveScene().buildIndex - 1];
+
+		ennemieSpawnRandom.ennemieIsSpawning = level.ennemieSpawn;
+		ennemieSpawnRandom.bonusIsSpawning = level.bonusSpawn;
 	}
 
 	private void	Update(){
@@ -38,13 +44,18 @@ public class PlayerStats : MonoBehaviour{
 		tp = Mathf.Min(Time.time - tpTime, tpRecovery);
 
 		// Score
-		Level	level = levels[SceneManager.GetActiveScene().buildIndex - 1];
 		if (level.useScore && score >= level.scoreToPass){
 			if (levelEnded == false){
 				ennemieSpawnRandom.spawnRandom = float.MaxValue;
 				ennemieSpawnRandom.spawnRandomBonus = float.MaxValue;
 
-				GameObject[]	allEnemy = GameObject.FindGameObjectsWithTag("Enemy");
+				GameObject[]	allSpawner =
+					GameObject.FindGameObjectsWithTag("Respawn");
+				foreach (GameObject go in allSpawner)
+					go.GetComponent<Spawner>().spawnRandom = float.MaxValue;
+
+				GameObject[]	allEnemy =
+					GameObject.FindGameObjectsWithTag("Enemy");
 				foreach (GameObject foe in allEnemy)
 					Destroy(foe);
 
@@ -82,6 +93,8 @@ public class PlayerStats : MonoBehaviour{
 
 	[System.Serializable]
 	public class Level{
+		public bool		ennemieSpawn = true;
+		public bool		bonusSpawn = true;
 		public bool		useScore = true;
 		public int		scoreToPass = 100;
 		public string	targetRoom;

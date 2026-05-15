@@ -127,7 +127,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2800263581003978510}
   serializedVersion: 5
-  m_Mass: 100
+  m_Mass: 9999
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -294,16 +294,24 @@ MonoBehaviour:
   multishot: 0
   score: 0
   levels:
-  - useScore: 1
+  - ennemieSpawn: 1
+    bonusSpawn: 1
+    useScore: 1
     scoreToPass: 100
     targetRoom: Level2
-  - useScore: 1
+  - ennemieSpawn: 0
+    bonusSpawn: 1
+    useScore: 1
     scoreToPass: 100
     targetRoom: Level3
-  - useScore: 1
+  - ennemieSpawn: 1
+    bonusSpawn: 1
+    useScore: 1
     scoreToPass: 120
     targetRoom: Level4
-  - useScore: 0
+  - ennemieSpawn: 1
+    bonusSpawn: 1
+    useScore: 0
     scoreToPass: 0
     targetRoom: Credit
 --- !u!1 &6080242332217092839

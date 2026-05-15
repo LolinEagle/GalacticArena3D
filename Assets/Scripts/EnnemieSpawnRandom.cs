@@ -3,19 +3,20 @@ using UnityEngine.AI;
 
 public class EnnemieSpawnRandom : MonoBehaviour{
 	[Header("Ennemie Spawn Settings")]
-	[SerializeField] private bool		ennemieIsSpawning = true;
+	public bool							ennemieIsSpawning = true;
 	[SerializeField] private GameObject	ennemiePrefab;
 	[SerializeField] private float		spawnRate;
 
 	[Header("Bonus Spawn Settings")]
-	[SerializeField] private bool		bonusIsSpawning = true;
+	public bool							bonusIsSpawning = true;
 	[SerializeField] private GameObject	bonusPrefab;
 	[SerializeField] private float		spawnRateBonus;
 
 	private static EnnemieSpawnRandom	instance = null;// Singleton pattern
 
-	public float	spawnRandom;		// Timestamp of the spawn of ennemie
-	public float	spawnRandomBonus;	// Timestamp of the spawn of bonus
+	// Timestamp of the spawn
+	[HideInInspector] public float	spawnRandom;
+	[HideInInspector] public float	spawnRandomBonus;
 
 	private Transform				parent;
 	private NavMeshTriangulation	t;				// NavMesh data
