@@ -16,10 +16,11 @@ public class PlayerStats : MonoBehaviour{
 
 	[Header("Levels list")]
 	[SerializeField] private Level[]	levels;
-	
+
+	[HideInInspector] public Level	level;
+
 	private EnnemieSpawnRandom	ennemieSpawnRandom;
 	private Image				levelEndScreen;
-	private	Level				level;
 	private float				iLevelEnded = 0f;
 	private bool				levelEnded = false;
 

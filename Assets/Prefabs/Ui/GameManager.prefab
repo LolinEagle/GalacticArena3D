@@ -113,7 +113,8 @@ MonoBehaviour:
   multishotText: {fileID: 1733326954337175976}
   multishotBar: {fileID: 1838154411149685000}
   scoreText: {fileID: 2242092688896321801}
-  levelTextBox: {fileID: 5157424668665211495}
+  LevelBox: {fileID: 5157424668665211495}
+  LevelText: {fileID: 8375451200395531425}
 --- !u!114 &3601872036422020913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -566,6 +567,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7056601000137565689, guid: c0cf50fea3eb6664491440d680c6e5e1, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -686,6 +691,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!114 &8375451200395531425 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7056601000137565689, guid: c0cf50fea3eb6664491440d680c6e5e1, type: 3}
+  m_PrefabInstance: {fileID: 1573305779261043032}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!224 &8455205101903974368 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6954522625274216120, guid: c0cf50fea3eb6664491440d680c6e5e1, type: 3}

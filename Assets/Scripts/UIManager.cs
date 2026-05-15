@@ -1,31 +1,32 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour{
 	[Header("Player Health")]
-	[SerializeField] private TMP_Text		healText;
-	[SerializeField] private Image			healBar1;
-	[SerializeField] private Image			healBar2;
-	[SerializeField] private Image			healBar3;
-	[SerializeField] private TMP_Text		HealBarText;
+	[SerializeField] private TMP_Text	healText;
+	[SerializeField] private Image		healBar1;
+	[SerializeField] private Image		healBar2;
+	[SerializeField] private Image		healBar3;
+	[SerializeField] private TMP_Text	HealBarText;
 
 	[Header("Teleportation")]
-	[SerializeField] private TMP_Text		tpText;
-	[SerializeField] private Image			tpBar;
+	[SerializeField] private TMP_Text	tpText;
+	[SerializeField] private Image		tpBar;
 
 	[Header("Multishot")]
-	[SerializeField] private TMP_Text		multishotText;
-	[SerializeField] private Image			multishotBar;
+	[SerializeField] private TMP_Text	multishotText;
+	[SerializeField] private Image		multishotBar;
 
 	[Header("Other")]
-	[SerializeField] private TMP_Text		scoreText;
-	[SerializeField] private GameObject		levelTextBox;
+	[SerializeField] private TMP_Text	scoreText;
+	[SerializeField] private GameObject	LevelBox;
+	[SerializeField] private TMP_Text	LevelText;
 
 	private static UIManager	instance = null;// Singleton pattern
 
-	private PlayerStats	playerStats;
-	private string		objective = "100";
+	private PlayerStats	p;
 	private float		timeStamp;
 
 	private void	Awake(){
@@ -40,31 +41,38 @@ public class UIManager : MonoBehaviour{
 	}
 
 	private void	Start(){
-		playerStats = FindAnyObjectByType<PlayerStats>();
+		p = FindAnyObjectByType<PlayerStats>();
+		LevelText.text = $"Level {SceneManager.GetActiveScene().buildIndex}";
+		if (p.level.useScore)
+			LevelText.text += $"\r\nObjective : {p.level.scoreToPass}";
 	}
 
 	private void	Update(){
 		// Player Health
-		if (playerStats.heal >= 0f)
-			HealBarText.text = playerStats.heal.ToString();
-		healBar1.fillAmount = playerStats.heal / 100f;
-		healBar2.fillAmount = (playerStats.heal / 100f) - 1f;
-		healBar3.fillAmount = (playerStats.heal / 100f) - 2f;
+		if (p.heal >= 0f)
+			HealBarText.text = p.heal.ToString();
+		healBar1.fillAmount = p.heal / 100f;
+		healBar2.fillAmount = (p.heal / 100f) - 1f;
+		healBar3.fillAmount = (p.heal / 100f) - 2f;
 
 		// Teleportation
-		tpBar.fillAmount = playerStats.GetTp() / playerStats.GetRecovery();
+		tpBar.fillAmount = p.GetTp() / p.GetRecovery();
 
 		// Multishot
-		if (playerStats.multishot > 20)
-			multishotText.text = $"+{playerStats.multishot - 20}";
+		if (p.multishot > 20)
+			multishotText.text = $"+{p.multishot - 20}";
 		else
 			multishotText.text = "Multishot";
-		multishotBar.fillAmount = Mathf.Min(playerStats.multishot / 20f, 1f);
+		multishotBar.fillAmount = Mathf.Min(p.multishot / 20f, 1f);
 
 		// Score
-		scoreText.text = $"Score : {playerStats.score:D3} / {objective}";
+		if (p.level.useScore)
+			scoreText.text = $"Score : {p.score:D3} / {p.level.scoreToPass}";
+		else
+			scoreText.text = $"Score : {p.score:D3}";	
 
 		// Level Text
-		if (Time.time - timeStamp > 5f) levelTextBox.SetActive(false);
+		if (Time.time - timeStamp > 5f)
+			LevelBox.SetActive(false);
 	}
 }
